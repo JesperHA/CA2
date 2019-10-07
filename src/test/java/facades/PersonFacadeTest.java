@@ -38,7 +38,7 @@ public class PersonFacadeTest {
                 "jdbc:mysql://206.81.26.184:3306/CA2_test",
                 "dev",
                 "ax2",
-                EMF_Creator.Strategy.DROP_AND_CREATE);
+                EMF_Creator.Strategy.CREATE);
         facade = PersonFacade.getPersonFacade(emf);
     }
 
