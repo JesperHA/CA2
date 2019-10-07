@@ -1,6 +1,6 @@
 package rest;
 
-import entities.RenameMe;
+import entities.Person;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -23,12 +23,13 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-//@Disabled
+@Disabled
 public class PersonResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static RenameMe r1,r2;
+    private static final String TEST_DB = "jdbc:mysql://localhost:3307/CA2";
+    private static Person p1, p2, p3;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -65,13 +66,15 @@ public class PersonResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new RenameMe("Some txt","More text");
-        r2 = new RenameMe("aaa","bbb");
+        p1 = new Person("Jønke", "Jensen", "25478963", "Vestergade 11", "Skydning");
+        p2 = new Person("Lamseben", "Lammesen", "25846263", "Gulerodsgade 1", "Bueskydning");
+        p3 = new Person("Makrellen", "Hønningsen", "54712547", "Østergade 6", "Skydning");
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(r1);
-            em.persist(r2); 
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.persist(p1);
+            em.persist(p2); 
+            em.persist(p3); 
             em.getTransaction().commit();
         } finally { 
             em.close();

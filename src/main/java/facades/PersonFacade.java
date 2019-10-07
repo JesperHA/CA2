@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,7 +25,7 @@ public class PersonFacade implements IPersonFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static PersonFacade PersonFacade(EntityManagerFactory _emf) {
+    public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new PersonFacade();
@@ -37,11 +38,11 @@ public class PersonFacade implements IPersonFacade {
     }
     
     //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    public long getPersonCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
+            long PersonCount = (long)em.createQuery("SELECT COUNT(r) FROM Person r").getSingleResult();
+            return PersonCount;
         }finally{  
             em.close();
         }
@@ -101,11 +102,22 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
     }
+   
 
     @Override
     public Person getPersonByPhone(String phone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           EntityManager em = getEntityManager();
+        try{
+         
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM PERSON p WHERE p.PHONE = ?1", Person.class);
+            Person person = query.setParameter(1, phone).getSingleResult();
+            
+            return person;
+        }finally{
+            em.close();
+        }
     }
+
 
     @Override
     public Person getPersonsByHobby(String hobby) {
