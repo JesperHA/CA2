@@ -2,12 +2,16 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import entities.Phone;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 
@@ -24,7 +28,11 @@ public class Person implements Serializable {
     private Long id;    
     private String firstName;
     private String lastName;
-    private String phone;
+    //private String phone;
+    
+    @OneToMany(mappedBy = "person")
+    private List<Phone> phones = new ArrayList();
+    
     private String Address;
     private String Hobby;
     
@@ -33,10 +41,10 @@ public class Person implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastEdited;
     
-    public Person(String firstName, String lastName, String phone, String Address, String Hobby) {
+    public Person(String firstName, String lastName,/* List phones,*/ String Address, String Hobby) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
+        //this.phones = phones;
         this.Address = Address;
         this.Hobby = Hobby;
         this.created = new Date();
@@ -45,6 +53,10 @@ public class Person implements Serializable {
 
     
     public Person() {
+    }
+    
+    public void addPhone(Phone phone){
+        phones.add(phone);
     }
     
 
@@ -70,14 +82,6 @@ public class Person implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getAddress() {

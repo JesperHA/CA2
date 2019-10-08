@@ -49,11 +49,10 @@ public class PersonFacade implements IPersonFacade {
         
     }
 
-    // TODO : Addresse feltet skal laves om så det et addresse object istedet for en streng
     @Override
-    public Person addPerson(String fName, String lName, String phone, String address, String hobby) {
+    public Person addPerson(String fName, String lName,/* List phones,*/ String address, String hobby) {
         EntityManager em = getEntityManager();
-        Person person = new Person(fName, lName, phone, address, hobby);
+        Person person = new Person(fName, lName,/* phones,*/ address, hobby);
         
         try{
             em.getTransaction().begin();
@@ -87,7 +86,7 @@ public class PersonFacade implements IPersonFacade {
             Person person = em.find(Person.class, p.getId());
             person.setFirstName(p.getFirstName());
             person.setLastName(p.getLastName());
-            person.setPhone(p.getPhone());
+            //person.setPhone(p.getPhone());
             person.setAddress(p.getAddress());
             person.setHobby(p.getHobby());
             person.setLastEdited();

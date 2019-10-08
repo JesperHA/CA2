@@ -13,7 +13,7 @@ import java.util.List;
  * @author jelle
  */
 public interface IPersonFacade {
-  public Person addPerson(String fName, String lName, String phone, String address, String hobby);
+  public Person addPerson(String fName, String lName, String address, String hobby);
   public Person deletePerson(long id);  
   public Person editPerson(Person p); 
   

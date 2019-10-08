@@ -3,6 +3,7 @@ package facades;
 import entities.Person;
 import utils.EMF_Creator;
 import entities.Person;
+import entities.Phone;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -64,9 +65,12 @@ public class PersonFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        p1 = new Person("Jønke", "Jensen", "25478963", "Vestergade 11", "Skydning");
-        p2 = new Person("Lamseben", "Lammesen", "25846263", "Gulerodsgade 1", "Bueskydning");
-        p3 = new Person("Makrellen", "Hønningsen", "54712547", "Østergade 6", "Skydning");
+        p1 = new Person("Jønke", "Jensen", "Vestergade 11", "Skydning");
+        p2 = new Person("Lamseben", "Lammesen", "Gulerodsgade 1", "Bueskydning");
+        p3 = new Person("Makrellen", "Hønningsen", "Østergade 6", "Skydning");
+        
+        Phone phone = new Phone("45874125");
+        p1.addPhone(phone);
         
         try {
             em.getTransaction().begin();
@@ -100,7 +104,7 @@ public class PersonFacadeTest {
 
     @Test
     public void testAddPerson(){
-        Person p = facade.addPerson("Jon", "Snow", "87654128", "Storegade 10", "Øl");
+        Person p = facade.addPerson("Jon", "Snow", "Storegade 10", "Øl");
         assertNotNull(p.getId());
         EntityManager em = emf.createEntityManager();
         try{
