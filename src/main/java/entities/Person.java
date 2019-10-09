@@ -5,6 +5,7 @@ import java.util.Date;
 import entities.Phone;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Person implements Serializable {
     private String lastName;
     //private String phone;
     
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy="person", cascade = { CascadeType.PERSIST }) // Non owning side
     private List<Phone> phones = new ArrayList();
     
     private String Address;

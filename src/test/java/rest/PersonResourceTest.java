@@ -66,9 +66,12 @@ public class PersonResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        p1 = new Person("Jønke", "Jensen", "25478963", "Vestergade 11", "Skydning");
-        p2 = new Person("Lamseben", "Lammesen", "25846263", "Gulerodsgade 1", "Bueskydning");
-        p3 = new Person("Makrellen", "Hønningsen", "54712547", "Østergade 6", "Skydning");
+        p1 = new Person("Jønke", "Jensen", /*"25478963",*/ "Vestergade 11", "Skydning");
+        p2 = new Person("Lamseben", "Lammesen"/*"25478963",*/, "Gulerodsgade 1", "Bueskydning");
+        p3 = new Person("Makrellen", "Hønningsen"/*"25478963",*/, "Østergade 6", "Skydning");
+        
+        //String firstName, String lastName,/* List phones,*/ String Address, String Hobby
+        
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
@@ -84,7 +87,7 @@ public class PersonResourceTest {
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/xxx").then().statusCode(200);
+        given().when().get("/person").then().statusCode(200);
     }
    
     //This test assumes the database contains two rows
@@ -92,7 +95,7 @@ public class PersonResourceTest {
     public void testDummyMsg() throws Exception {
         given()
         .contentType("application/json")
-        .get("/xxx/").then()
+        .get("/person/").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("msg", equalTo("Hello World"));   
@@ -102,7 +105,7 @@ public class PersonResourceTest {
     public void testCount() throws Exception {
         given()
         .contentType("application/json")
-        .get("/xxx/count").then()
+        .get("/person/count").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("count", equalTo(2));   

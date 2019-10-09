@@ -41,7 +41,7 @@ public class PersonFacade implements IPersonFacade {
     public long getPersonCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long PersonCount = (long)em.createQuery("SELECT COUNT(r) FROM Person r").getSingleResult();
+            long PersonCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
             return PersonCount;
         }finally{  
             em.close();
@@ -108,7 +108,7 @@ public class PersonFacade implements IPersonFacade {
            EntityManager em = getEntityManager();
         try{
          
-            TypedQuery<Person> query = em.createQuery("SELECT p FROM PERSON p WHERE p.PHONE = ?1", Person.class);
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM PERSON p WHERE p.PHONE = :1", Person.class);
             Person person = query.setParameter(1, phone).getSingleResult();
             
             return person;
