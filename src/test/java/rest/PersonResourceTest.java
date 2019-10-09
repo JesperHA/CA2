@@ -23,7 +23,7 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-@Disabled
+//@Disabled
 public class PersonResourceTest {
 
     private static final int SERVER_PORT = 7777;
@@ -108,6 +108,6 @@ public class PersonResourceTest {
         .get("/person/count").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("count", equalTo(2));   
+        .body("count", equalTo(3));   
     }
 }
