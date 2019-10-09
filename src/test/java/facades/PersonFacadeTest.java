@@ -36,10 +36,10 @@ public class PersonFacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://206.81.26.184:3306/CA2_test",
+                "jdbc:mysql://localhost:3307/startcode_test",
                 "dev",
                 "ax2",
-                EMF_Creator.Strategy.CREATE);
+                EMF_Creator.Strategy.DROP_AND_CREATE);
         facade = PersonFacade.getPersonFacade(emf);
     }
 
