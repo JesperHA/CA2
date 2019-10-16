@@ -16,6 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
@@ -51,14 +52,13 @@ public class PersonResource {
     @Path("addPerson")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Person addNewPerson(@FormParam("firstname") String firstName, @FormParam("lastname") String lastName, @FormParam("adresse") String adresse, @FormParam("hobby") String hobby) {
+    @Consumes("application/x-www-form-urlencoded")
+    public Response addNewPerson(@FormParam("firstname") String firstName, @FormParam("lastname") String lastName, @FormParam("adresse") String adresse, @FormParam("hobby") String hobby, @FormParam("telefon") String telefon) {
         Person p = FACADE.addPerson(firstName, lastName, adresse, hobby);
-        //Phone ph = new Phone(phone);
-        //p.addPhone(ph);
+        Phone ph = new Phone(telefon);
+        p.addPhone(ph);
         //VIS TILFØJET PERSON
-        return p;
-
-        
+        return Response.ok("Person created with name: " + firstName).build();
     }
    
     
