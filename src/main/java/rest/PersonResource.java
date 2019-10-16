@@ -8,6 +8,7 @@ import utils.EMF_Creator;
 import facades.PersonFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -44,25 +45,22 @@ public class PersonResource {
     }
     
     // ADD & DELETE & EDIT
+    //-------------------------------------------------------------------
     
-    @Path("/addPerson/{fName}/{lName}/{adresse}/{hobby}/{phone}")
+    //@Path("/addPerson/{fName}/{lName}/{adresse}/{hobby}/{phone}")
+    @Path("addPerson")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Person addNewPerson(
-            @PathParam("fName") String firstName, 
-            @PathParam("lName") String lastName, 
-            @PathParam("adresse") String adresse,
-            @PathParam("hobby") String hobby,
-            @PathParam("phone") String phone) {
-        
+    public Person addNewPerson(@FormParam("firstname") String firstName, @FormParam("lastname") String lastName, @FormParam("adresse") String adresse, @FormParam("hobby") String hobby) {
         Person p = FACADE.addPerson(firstName, lastName, adresse, hobby);
-        Phone ph = new Phone(phone);
-        p.addPhone(ph);
-        
+        //Phone ph = new Phone(phone);
+        //p.addPhone(ph);
         //VIS TILFØJET PERSON
         return p;
+
         
     }
+   
     
     @Path("count")
     @GET
