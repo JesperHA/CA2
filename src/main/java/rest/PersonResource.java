@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Person;
+import entities.Phone;
 import utils.EMF_Creator;
 import facades.PersonFacade;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +34,36 @@ public class PersonResource {
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
+    
+    @Path("/phone/{phone}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Person getPersonByPhone(@PathParam("phone") String phone) {
+        Person p = FACADE.getPersonByPhone(phone);
+        return p;  //Done manually so no need for a DTO
+    }
+    
+    // ADD & DELETE & EDIT
+    
+    @Path("/addPerson/{fName}/{lName}/{adresse}/{hobby}/{phone}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Person addNewPerson(
+            @PathParam("fName") String firstName, 
+            @PathParam("lName") String lastName, 
+            @PathParam("adresse") String adresse,
+            @PathParam("hobby") String hobby,
+            @PathParam("phone") String phone) {
+        
+        Person p = FACADE.addPerson(firstName, lastName, adresse, hobby);
+        Phone ph = new Phone(phone);
+        p.addPhone(ph);
+        
+        //VIS TILFØJET PERSON
+        return p;
+        
+    }
+    
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
