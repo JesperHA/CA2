@@ -55,7 +55,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes("application/x-www-form-urlencoded")
     public Response addNewPerson(@FormParam("firstname") String firstName, @FormParam("lastname") String lastName, @FormParam("adresse") String adresse, @FormParam("hobby") String hobby, @FormParam("telefon") String telefon) {
-        Person p = FACADE.addPerson(firstName, lastName, adresse, hobby);
+        Person p = FACADE.addPerson(firstName, lastName, adresse, hobby, telefon);
         Phone ph = new Phone(telefon);
         p.addPhone(ph);
         //VIS TILFØJET PERSON
@@ -72,6 +72,7 @@ public class PersonResource {
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
     
+    /*
     @Path("SearchByPhone{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -79,7 +80,9 @@ public class PersonResource {
         Person person = FACADE.getPersonByPhone(id);
         return GSON.toJson(new PersonDTO(person));
     }
+    */
 
+    /*
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -88,5 +91,6 @@ public class PersonResource {
         Person pNew = FACADE.addPerson(p.getFirstName(), p.getLastName(), p.getAddress(), p.getHobby());
         return GSON.toJson(new PersonDTO(pNew));
     }
+    */
  
 }

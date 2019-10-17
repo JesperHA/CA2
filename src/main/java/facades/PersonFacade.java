@@ -1,6 +1,7 @@
 package facades;
 
 import entities.Person;
+import entities.Phone;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -48,11 +49,13 @@ public class PersonFacade implements IPersonFacade {
         }
         
     }
-
     @Override
-    public Person addPerson(String fName, String lName,/* List phones,*/ String address, String hobby) {
+    public Person addPerson(String fName, String lName, String address, String hobby, String phone) {
         EntityManager em = getEntityManager();
         Person person = new Person(fName, lName,/* phones,*/ address, hobby);
+        Phone ph = new Phone(phone);
+        person.addPhone(ph);
+        
         
         try{
             em.getTransaction().begin();

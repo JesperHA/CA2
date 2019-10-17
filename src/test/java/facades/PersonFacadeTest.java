@@ -104,7 +104,7 @@ public class PersonFacadeTest {
 
     @Test
     public void testAddPerson(){
-        Person p = facade.addPerson("Jon", "Snow", "Storegade 10", "Øl");
+        Person p = facade.addPerson("Jon", "Snow", "Storegade 10", "Øl", "23541278");
         assertNotNull(p.getId());
         EntityManager em = emf.createEntityManager();
         try{
