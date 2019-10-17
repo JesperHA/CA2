@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,6 +33,7 @@ public class Person implements Serializable {
     //private String phone;
     
     @OneToMany(mappedBy="person", cascade = { CascadeType.PERSIST }) // Non owning side
+    @JoinColumn(name = "phone_id")
     private List<Phone> phones = new ArrayList();
     
     private String Address;

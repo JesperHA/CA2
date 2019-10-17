@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -26,6 +27,7 @@ public class Phone implements Serializable {
     private Long id;
     
     @ManyToOne(cascade = { CascadeType.PERSIST })
+    @JoinColumn(name = "PERSON_ID")
     private Person person;
     
     private String phone;
