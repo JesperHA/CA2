@@ -104,7 +104,11 @@ public class PersonFacadeTest {
 
     @Test
     public void testAddPerson(){
+<<<<<<< HEAD
         Person p = facade.addPerson("Jon", "Snow", "Storegade 10", "Øl","23124232");
+=======
+        Person p = facade.addPerson("Jon", "Snow", "Storegade 10", "Øl", "23541278");
+>>>>>>> 3fa92d0429fe152dd7cb26f1152fb20fb0a22796
         assertNotNull(p.getId());
         EntityManager em = emf.createEntityManager();
         try{
