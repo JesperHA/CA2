@@ -50,19 +50,12 @@ public class PersonFacade implements IPersonFacade {
         
     }
     @Override
-<<<<<<< HEAD
      public Person addPerson(String fName, String lName, String address, String hobby, String phone) {
-=======
-    public Person addPerson(String fName, String lName, String address, String hobby, String phone) {
->>>>>>> 3fa92d0429fe152dd7cb26f1152fb20fb0a22796
         EntityManager em = getEntityManager();
         Person person = new Person(fName, lName,/* phones,*/ address, hobby);
         Phone ph = new Phone(phone);
         person.addPhone(ph);
-<<<<<<< HEAD
-=======
-        
->>>>>>> 3fa92d0429fe152dd7cb26f1152fb20fb0a22796
+
         
         try{
             em.getTransaction().begin();

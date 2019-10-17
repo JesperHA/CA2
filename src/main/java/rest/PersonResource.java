@@ -56,11 +56,6 @@ public class PersonResource {
     @Consumes("application/x-www-form-urlencoded")
     public Response addNewPerson(@FormParam("firstname") String firstName, @FormParam("lastname") String lastName, @FormParam("adresse") String adresse, @FormParam("hobby") String hobby, @FormParam("telefon") String telefon) {
         Person p = FACADE.addPerson(firstName, lastName, adresse, hobby, telefon);
-<<<<<<< HEAD
-=======
-        Phone ph = new Phone(telefon);
-        p.addPhone(ph);
->>>>>>> 3fa92d0429fe152dd7cb26f1152fb20fb0a22796
         //VIS TILFØJET PERSON
         return Response.ok("Person created with name: " + firstName).build();
     }
