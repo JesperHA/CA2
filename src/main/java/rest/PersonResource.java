@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtomappers.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
 import facades.PersonFacade;
@@ -41,6 +42,22 @@ public class PersonResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
+    
+    @Path("SearchByPhone{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPersonByPhone(@PathParam("id") String id){
+        Person person = FACADE.getPersonByPhone(id);
+        return GSON.toJson(new PersonDTO(person));
+    }
 
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String addPerson(String person){
+        PersonDTO p = GSON.fromJson(person, PersonDTO.class);
+        Person pNew = FACADE.addPerson(p.getFirstName(), p.getLastName(), p.getAddress(), p.getHobby());
+        return GSON.toJson(new PersonDTO(pNew));
+    }
  
 }

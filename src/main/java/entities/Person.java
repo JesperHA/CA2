@@ -42,10 +42,9 @@ public class Person implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastEdited;
     
-    public Person(String firstName, String lastName,/* List phones,*/ String Address, String Hobby) {
+    public Person(String firstName, String lastName, String Address, String Hobby) {
         this.firstName = firstName;
         this.lastName = lastName;
-        //this.phones = phones;
         this.Address = Address;
         this.Hobby = Hobby;
         this.created = new Date();
