@@ -27,7 +27,7 @@ public class Phone implements Serializable {
     private Long id;
     
     @ManyToOne(cascade = { CascadeType.PERSIST })
-    @JoinColumn(name = "PERSON_ID")
+    @JoinColumn(name = "person_id")
     private Person person;
     
     private String phone;
