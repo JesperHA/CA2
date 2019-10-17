@@ -33,7 +33,7 @@ public class Person implements Serializable {
     //private String phone;
     
     @OneToMany(mappedBy="person", cascade = { CascadeType.PERSIST }) // Non owning side
-    @JoinColumn(name = "phone_id")
+    @JoinColumn(name = "ID")
     private List<Phone> phones = new ArrayList();
     
     private String Address;
